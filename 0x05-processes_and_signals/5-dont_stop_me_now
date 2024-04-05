@@ -5,3 +5,4 @@ kill "$(pgrep -f 4-to_infinity_and_beyond)"
 # ^ Use pgrep with the -f option to search for processes matching the specified pattern
 #   The pattern here is "4-to_infinity_and_beyond"
 #   pgrep returns the PID of the matching process
+#   This PID is then passed to the kill command to terminate the process
