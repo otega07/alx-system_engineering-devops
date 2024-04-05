@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-# Displays "To infinity and beyond" indefinitely with
-#+ a sleep 2 in between each iteration.
+# ^ Shebang line specifying the interpreter to be used
 
 while true
 do
-  echo "To infinity and beyond"
-  sleep 2
+  # Start of the infinite loop
+  echo "To infinity and beyond"  # Print the message to the console
+  sleep 2  # Pause execution for 2 seconds
 done
+# End of the loop
