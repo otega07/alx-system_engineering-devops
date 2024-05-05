@@ -41,7 +41,7 @@ frontend paxotega-frontend
         default_backend paxotega-backend
 
 frontend paxotega-frontend-https
-        bind *:443 ssl crt /etc/haproxy/certs/paxotega.tech.pem
+        bind *:443 ssl crt /etc/haproxy/certs/www.paxotega.tech.pem
         http-request set-header X-Forwarded-Proto https
         default_backend paxotega-backend
 
