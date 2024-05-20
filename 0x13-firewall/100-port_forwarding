@@ -10,10 +10,16 @@
 #   ufw-before-forward
 #
 
-# Allow port forwarding from port 8080/TCP to port 80/TCP
+# NAT table rules
 *nat
 :PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+
+# Port forwarding from 8080 to 80
 -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
+
 COMMIT
 
 # Don't delete these required lines, otherwise there will be errors
