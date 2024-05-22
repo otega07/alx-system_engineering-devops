@@ -1,0 +1,12 @@
+#
+# The MySQL server configuration file.
+#
+
+[mysqld]
+binlog_do_db    = tyrell_corp
+log_bin         = /var/log/mysql/mysql-bin.log
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+server-id	= 1
+datadir         = /var/lib/mysql
+log-error       = /var/log/mysql/error.log
