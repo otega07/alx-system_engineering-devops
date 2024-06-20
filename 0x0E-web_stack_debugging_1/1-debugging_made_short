@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#  Using what you did for task #0, make your fix short and sweet
 sudo bash -c 'echo -e "server {\n    listen 80 default_server;\n    server_name _;\n    return 200;\n}" > /etc/nginx/sites-available/default'
 sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo rm /etc/nginx/sites-enabled/default
