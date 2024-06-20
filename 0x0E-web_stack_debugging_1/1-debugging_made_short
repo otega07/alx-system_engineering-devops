@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-#  Using what i did for task #0, make your fix short and sweet
 sudo rm -f /etc/nginx/sites-enabled/default
-sudo bash -c 'cat >/etc/nginx/sites-available/default<<EOF;server{listen 80 default_server;server_name _;return 200;}'
-sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default;sudo systemctl restart nginx
+sudo bash -c 'cat >/etc/nginx/sites-available/default<<EOF
+server{listen 80 default_server;server_name _;return 200;}
+EOF'
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo systemctl restart nginx
