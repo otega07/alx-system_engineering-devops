@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#  using the fix from task #0 to make the task #1 better
-ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-service nginx restart
-pkill -SIGKILL -f "/usr/sbin/nginx"
+#  Using what i did for task #0, make your fix short and sweet
+sudo rm -f /etc/nginx/sites-enabled/default
+sudo bash -c 'cat >/etc/nginx/sites-available/default<<EOF;server{listen 80 default_server;server_name _;return 200;}'
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default;sudo systemctl restart nginx
