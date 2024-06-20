@@ -1,9 +1,20 @@
 #!/usr/bin/env bash
-#  A script that configures an Nginx server to listen on port 80
+# script that configures an Nginx server to listen on port 80 and return HTTP 200
 
-#  first remove the default Nginx file
-rm /etc/nginx/sites-enabled/default
-#  then configure nginx to listen on port 80
-ln -sf /etc/nginx/sites-availiable/default /etc/nginx/sites-enabled/default
-#  then restart nginx
-service nginx restart
+# First remove the default Nginx file
+sudo rm /etc/nginx/sites-enabled/default
+
+# Create or update the Nginx configuration file to return HTTP 200 status code
+sudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF
+server {
+    listen 80 default_server;
+    server_name _;
+    return 200;
+}
+EOF'
+
+# Create a symbolic link to enable the Nginx configuration
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+# Restart Nginx
+sudo service nginx restart
