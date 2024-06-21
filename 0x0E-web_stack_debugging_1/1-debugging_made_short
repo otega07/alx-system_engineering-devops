@@ -1,4 +1,5 @@
-ing what you did for task #0, make your fix short and sweet
+#!/usr/bin/env bash
+# uing what you did for task #0, make your fix short and sweet
 echo "server {
     listen 80
     server_name _
