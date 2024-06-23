@@ -1,4 +1,4 @@
-#!/python3
+#!/usr/bin/python3
 """
 This module contains the function top_ten.
 """
