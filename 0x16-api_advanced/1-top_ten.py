@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Script to print hot posts on a given Reddit subreddit.
+Python script to print hot posts on a given Reddit subreddit.
 """
 
 import requests
@@ -26,12 +26,31 @@ def top_ten(subreddit):
                             allow_redirects=False)
 
     # Check if the response status code indicates a not-found error (404)
-    if response.status_code == 404:
+    if response.status_code != 200:
         print("None")
         return
 
     # Parse the JSON response and extract the 'data' section
     results = response.json().get("data")
 
+    # If there are no results, print "None"
+    if results is None:
+        print("None")
+        return
+
+    # Get the list of hot posts
+    hot_posts = results.get("children")
+
+    # If there are no hot posts, print "None"
+    if not hot_posts:
+        print("None")
+        return
+
     # Print the titles of the top 10 hottest posts
-    [print(c.get("data").get("title")) for c in results.get("children")]
+    for post in hot_posts:
+        print(post.get("data").get("title"))
+
+
+if __name__ == "__main__":
+    subreddit = input("Enter a subreddit: ").strip()
+    top_ten(subreddit)
