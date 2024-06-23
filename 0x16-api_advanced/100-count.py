@@ -4,7 +4,8 @@ import requests
 
 
 def count_words(subreddit, word_list, instances={}, after="", count=0):
-    """Prints counts of given words found in hot posts of a given subreddit.
+    """Print counts of given words found in hot posts of a given subreddit.
+    
     Args:
         subreddit (str): The subreddit to search.
         word_list (list): The list of words to search for in post titles.
@@ -24,9 +25,9 @@ def count_words(subreddit, word_list, instances={}, after="", count=0):
     response = requests.get(url, headers=headers, params=params,
                             allow_redirects=False)
     try:
-        results = response.json()
         if response.status_code == 404:
             raise Exception
+        results = response.json()
     except Exception:
         print("")
         return
@@ -34,15 +35,17 @@ def count_words(subreddit, word_list, instances={}, after="", count=0):
     results = results.get("data")
     after = results.get("after")
     count += results.get("dist")
+
     for c in results.get("children"):
         title = c.get("data").get("title").lower().split()
         for word in word_list:
-            if word.lower() in title:
-                times = len([t for t in title if t == word.lower()])
-                if instances.get(word) is None:
-                    instances[word] = times
+            word_lower = word.lower()
+            if word_lower in title:
+                times = len([t for t in title if t == word_lower])
+                if instances.get(word_lower) is None:
+                    instances[word_lower] = times
                 else:
-                    instances[word] += times
+                    instances[word_lower] += times
 
     if after is None:
         if len(instances) == 0:
@@ -53,3 +56,11 @@ def count_words(subreddit, word_list, instances={}, after="", count=0):
             print("{}: {}".format(k, v))
     else:
         count_words(subreddit, word_list, instances, after, count)
+
+
+if __name__ == "__main__":
+    # Example usage
+    subreddit = input("Enter a subreddit: ").strip()
+    words = input("Enter words to count (comma-separated): ").strip().split(",")
+    words = [word.strip() for word in words]
+    count_words(subreddit, words)
