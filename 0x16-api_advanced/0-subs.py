@@ -1,27 +1,25 @@
 #!/usr/bin/python3
+''' 
+Python function that queries the Reddit API and returns the number of subscribers
 '''
-Python script that gathers and display employee data using REST API
-'''
+
 import requests
-from sys import argv
+
+def all_subscribers(subreddit):
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
+    headers = {'User-Agent': 'Reddit Bot by /u/AgitatedVegetable247'}
+
+    try:
+        response = requests.get(url, headers=headers, allow_redirects=False)
+        if response.status_code == 200:
+            data = response.json()
+            return data['data']['subscribers']
+        else:
+            return 0
+    except requests.RequestException:
+        return 0
 
 if __name__ == "__main__":
-    if len(argv) > 1:
-        user_id = argv[1]
-        base_url = "https://jsonplaceholder.typicode.com/"
-        req = requests.get("{}users/{}".format(base_url, user_id))
-        name = req.json().get("name")
-        if name is not None:
-            jreq = requests.get(
-                "{}todos?userId={}".format(
-                    base_url, user_id)).json()
-            alltsk = len(jreq)
-            completedtsk = []
-            for t in jreq:
-                if t.get("completed") is True:
-                    completedtsk.append(t)
-            count = len(completedtsk)
-            print("Employee {} is done with tasks({}/{}):"
-                  .format(name, count, alltsk))
-            for title in completedtsk:
-                print("\t {}".format(title.get("title")))
+    subreddit = "Kome"
+    subscribers = all_subscribers(subreddit)
+    print(f"The number of subscribers in r/{subreddit} is: {subscribers}")
