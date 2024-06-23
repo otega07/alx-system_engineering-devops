@@ -1,6 +1,6 @@
-#!/usr/bin/python3
+#!/python3
 """
-This module contains the function top_ten
+This module contains the function top_ten.
 """
 import requests
 from sys import argv
@@ -8,21 +8,25 @@ from sys import argv
 
 def top_ten(subreddit):
     """
-    Returns the top ten hot posts for a given subreddit
+    Prints the titles of the first 10 hot posts listed for a given subreddit.
     """
-    user = {'User-Agent': 'python:top_ten:v1.0 (by /u/yourusername)'}
+    headers = {'User-Agent': 'python:top_ten:v1.0 (by /u/yourusername)'}
     url = f'https://www.reddit.com/r/{subreddit}/hot/.json?limit=10'
-    response = requests.get(url, headers=user, allow_redirects=False)
-    
+    response = requests.get(url, headers=headers, allow_redirects=False)
+
     if response.status_code != 200:
         print(None)
         return
-    
+
     try:
         data = response.json().get('data')
-        for post in data.get('children'):
+        children = data.get('children')
+        if not children:
+            print(None)
+            return
+        for post in children:
             print(post.get('data').get('title'))
-    except Exception:
+    except (KeyError, TypeError, ValueError):
         print(None)
 
 
