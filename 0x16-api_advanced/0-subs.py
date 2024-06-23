@@ -17,6 +17,8 @@ def number_of_subscribers(subreddit):
         subscribers = data['data']['subscribers']
         return subscribers
     elif response.status_code == 404:
+        print(f"The subreddit r/{subreddit} does not exist.")
         return 0
     else:
+        print(f"Failed to retrieve data for subreddit r/{subreddit}. Status code: {response.status_code}")
         return -1
