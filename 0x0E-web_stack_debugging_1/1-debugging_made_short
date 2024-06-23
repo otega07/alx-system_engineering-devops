@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # using what you did for task #0, make your fix short and sweet
-echo -e "server {listen 80, server_name, return 200}" | sudo tee /etc/nginx/sites-available/default > /dev/null
+echo -e "server {listen 80 || server_name || return 200}" | sudo tee /etc/nginx/sites-available/default > /dev/null
 sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx start || sudo pkill -9 nginx
