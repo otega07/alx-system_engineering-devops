@@ -1,6 +1,3 @@
 #!/usr/bin/env bash
-
-#
-
-# Finds all Gunicorn processes and send them the HUP signal to reload
+# Successfully Finds all Gunicorn processes and send them the HUP signal to reload
 pgrep gunicorn | xargs kill -HUP
